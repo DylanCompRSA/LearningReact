@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+  width: 50%;
+}
+
+.subheading {
+  box-sizing: inherit; 
+}
+
+h3 {
+  text-align: left;
+}
+
+h4 {
+  font-size: 2.0rem;
+  font-weight: bold;
+}
+
+.display-3 {
+  font-size: 5.0rem !important;
+  font-weight: 100;
+  line-height: 1.1;
+}
