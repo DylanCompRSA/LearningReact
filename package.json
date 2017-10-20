@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^15.6.1",
+    "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.13"
@@ -21,6 +21,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.1",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.6.0",
@@ -28,8 +30,11 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "flow-bin": "^0.56.0",
-	"glamor": "^2.20.40",
+    "glamor": "^2.20.40",
     "glamorous": "^4.9.7",
-    "prettier": "1.7.4"
+    "jest": "^21.2.1",
+    "prettier": "1.7.4",
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0"
   }
 }

@@ -8,6 +8,7 @@ import { Nav } from 'react-bootstrap';
 import { NavItem } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import glamorous from 'glamorous';
+import GithubViewer from './GithubViewer';
 
 const JumboHead = glamorous.h1(
   {
@@ -93,6 +94,12 @@ export class SubHeading extends Component<Props> {
   }
 }
 
+export class GithubSearch extends Component<Props>{
+  render(){
+    return <GithubViewer/>
+  }
+}
+
 export class Header extends Component<Props> {
   render() {
     return (
@@ -102,12 +109,14 @@ export class Header extends Component<Props> {
             <NavItem eventKey={1} href="/Home" >Home</NavItem>
             <NavItem eventKey={2} href="/About" >About</NavItem>
             <NavItem eventKey={3} href="/Contact" >Contact</NavItem>
+            <NavItem eventKey={4} href="/GitHubViewer" >GitHub Viewer</NavItem>
           </Nav>
           <h3 className="text-muted"> Project Name </h3>
 
           <Route exact path="/Home" component={Home} />
           <Route path="/About" component={AboutUs} />
           <Route path="/Contact" component={ContactUs} />
+          <Route path="/GitHubViewer" component={GithubSearch} />
         </div>
 
       </Router>
