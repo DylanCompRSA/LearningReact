@@ -1,13 +1,39 @@
 //@flow
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, Form,  InputGroup, FormControl, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Form,  InputGroup, FormControl, Button, Panel, Thumbnail } from 'react-bootstrap';
 import axios from "axios";
 
 type Props = {
   searchText: string,
   result: Array<Object>,
-  currentUser: Object
+  selectedUser: Object
 };
+
+class UserProfile extends Component {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      selectedUser: props.selectedUser,
+    };
+  }
+  componentWillReceiveProps(newProps: Props) {
+    this.setState({ selectedUser: newProps.selectedUser});
+  }
+
+  render() {
+    return (
+      <div className="userProfile">
+        {console.log("hitThis")}
+      <Panel header="User">
+          <ListGroup fill>
+            {/* <ListGroupItem><Thumbnail href="#" alt="171x180" src={this.state.selectedUser.avatar_url} /></ListGroupItem> */}
+            <ListGroupItem>Username: {this.state.selectedUser.login}</ListGroupItem>
+            <ListGroupItem>Name: {this.state.selectedUser.name}</ListGroupItem>
+          </ListGroup>
+      </Panel>
+      </div>
+    )}
+}
 
 export class GithubViewer extends Component<Props>{
   constructor(props: Props) {
@@ -15,7 +41,7 @@ export class GithubViewer extends Component<Props>{
     this.state = {
       searchText: "",
       result: [],
-      currentUser: null
+      selectedUser: null
     };
   }
   getUsers = () => {
@@ -33,9 +59,22 @@ export class GithubViewer extends Component<Props>{
   }
   getUserList = () => {
     return this.state.result.map((li) => {
-      return <ListGroupItem key={li.id} onClick={() => {this.setState({currentUser: li}) }} > {li.login} </ListGroupItem>
+      return <ListGroupItem key={li.id} onClick={() => this.getSelectedUser(li)} > {li.login} </ListGroupItem>
     })
   }
+  getSelectedUser = (user) => {
+    if(user != null)
+    {
+      axios.get('https://api.github.com/users/' + user.login)
+      .then(response => {
+        this.setState({ selectedUser: response.data })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
+  }
+
   render() {
     return (
       <div className="row subheading">
@@ -52,6 +91,9 @@ export class GithubViewer extends Component<Props>{
             <h3>Results</h3>
             <ListGroup>{this.state.result.length > 0 ? this.getUserList() : ''}</ListGroup>
           </div>
+        </div>
+        <div className="col-lg-6">
+          {this.state.selectedUser ? (<UserProfile selectedUser={this.state.selectedUser} />) : ("")}
         </div>
       </div>
     )}
